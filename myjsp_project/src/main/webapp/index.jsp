@@ -9,5 +9,9 @@
 </head>
 <body>
 	<h1> Index page </h1>
+	
+	
+	<a href="/brd/register"><button>글쓰기</button></a>
+	<a href="/brd/list"><button> 리스트</button></a>
 </body>
 </html>
