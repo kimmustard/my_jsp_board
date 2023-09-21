@@ -5,10 +5,30 @@
 <mapper namespace="BoardMapper">
 
 	<insert id="add" parameterType="bvo">
-		insert into board(title, writer, content) 
-		values(#{title}, #{writer}, #{content})
+		insert into board(title, writer, content, image_File) 
+		values(#{title}, #{writer}, #{content}, #{image_File})
 	</insert>
 
-
+	<select id="list" resultType="bvo">
+		select * from board
+	</select>
+	
+	<select id="detail" parameterType="int" resultType="bvo">
+		select * from board where bno = #{bno}
+	</select>
+	
+	<update id="read">
+		update board set readcount = readcount + 1 where bno = #{bno};
+	</update>
+	
+	<update id="up" parameterType="bvo">
+	  	update board set title = #{title}, content = #{content}, moddate = now(), 
+	  	image_File = #{image_File}
+	  	where bno = #{bno}
+  	</update>
+  	
+  	<delete id="del" parameterType="int">
+  		delete from board where bno = #{bno}
+  	</delete>
 
 </mapper>

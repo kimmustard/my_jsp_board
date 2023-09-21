@@ -1,6 +1,7 @@
 package domain;
 
 public class BoardVO {
+	
 	private int bno;
 	private String title;
 	private String writer;
@@ -9,6 +10,7 @@ public class BoardVO {
 	private String moddate;
 	private int readcount;
 	private String image_File;
+	private int recommend;	//추천
 	
 	public BoardVO() {
 		
@@ -30,19 +32,19 @@ public class BoardVO {
 	}
 
 	
-	
 	//리스트 조회
-	public BoardVO(int bno, String title, String writer, String regdate) {
+	public BoardVO(int bno, String title, String writer, String regdate, int recommend) {
 		this.bno = bno;
 		this.title = title;
 		this.writer = writer;
 		this.regdate = regdate;
+		this.recommend = recommend;
 	}
 
 
 	//전체조회
 	public BoardVO(int bno, String title, String writer, String content, String regdate, String moddate, int readcount,
-			String image_File) {
+			String image_File, int recommend) {
 		this.bno = bno;
 		this.title = title;
 		this.writer = writer;
@@ -51,7 +53,12 @@ public class BoardVO {
 		this.moddate = moddate;
 		this.readcount = readcount;
 		this.image_File = image_File;
+		this.recommend = recommend;
 	}
+
+	
+	
+
 
 
 	public int getBno() {
@@ -119,11 +126,27 @@ public class BoardVO {
 	}
 
 
+	public int getRecommend() {
+		return recommend;
+	}
+
+
+	public void setRecommend(int recommend) {
+		this.recommend = recommend;
+	}
+
+
 	@Override
 	public String toString() {
 		return "BoardVO [bno=" + bno + ", title=" + title + ", writer=" + writer + ", content=" + content + ", regdate="
-				+ regdate + ", moddate=" + moddate + ", readcount=" + readcount + ", image_File=" + image_File + "]";
+				+ regdate + ", moddate=" + moddate + ", readcount=" + readcount + ", image_File=" + image_File
+				+ ", recommend=" + recommend + "]";
 	}
+
+
+	
+
+
 	
 	
 	
