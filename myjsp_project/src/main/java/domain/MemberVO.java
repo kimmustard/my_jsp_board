@@ -8,14 +8,13 @@ public class MemberVO {
 	private String regdate;
 	private String lastlogin;
 	
-	private String introduce;
-	private String profile;
+	private String introduce;	//자기소개
+	private String profile;	//프로필사진
 	
 	public MemberVO() {
 		
 	}
 
-	
 
 	public MemberVO(String id, String pwd) {
 		this.id = id;

@@ -15,3 +15,16 @@ primary key(bno));
 alter table  board add recommend int default 0;
 
 
+
+//Member DB
+create table member(
+id varchar(100),
+pwd varchar(100) not null,
+email varchar(100) not null,
+age int default 0,
+introduce text,
+profile varchar(500),
+regdate datetime default now(),
+lastlogin datetime default now(),
+primary key(id));
+// 자기소개, 프로필사진 경로 추가
