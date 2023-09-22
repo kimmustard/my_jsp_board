@@ -140,8 +140,13 @@ public class BoardController extends HttpServlet {
 						int qty = Integer.parseInt(request.getParameter("qty"));
 						pgvo = new PagingVO(pageNo, qty);
 					}
-					
 				
+				String type = request.getParameter("type");
+				String keyword = request.getParameter("keyword");
+				pgvo.setType(type);
+				pgvo.setKeyword(keyword);
+					
+					
 				int totalCount = bsv.getTotalCount(pgvo);	//DB 모든 게시물 숫자 요청
 				log.info("totalCount  = {}", totalCount);
 				List<PagingVO> list = bsv.getPageList(pgvo);

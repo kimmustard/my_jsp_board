@@ -31,3 +31,17 @@ lastlogin datetime default now(),
 primary key(id));
 // 등급추가(일반회원,우수회원,관리자)
 alter table member add grade int default 0;
+
+
+
+//Comment DB
+create table comment(
+cno int auto_increment,
+bno int not null,
+writer varchar(200) not null default "unknown",
+content varchar(1000),
+regdate datetime default now(),
+primary key(cno)
+);
+//댓글 추천수 추가
+alter table comment add cmt_recommend int default 0;
