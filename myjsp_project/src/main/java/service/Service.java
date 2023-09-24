@@ -23,6 +23,10 @@ public interface Service {
 
 	List<PagingVO> getPageList(PagingVO pgvo);
 
+	List<BoardVO> getMyList(String writer);
+
+
+
 
 	
 

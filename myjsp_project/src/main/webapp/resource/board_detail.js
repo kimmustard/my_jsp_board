@@ -63,8 +63,8 @@ function spreadCommentList(result) {
         str += `</h4>`;
         str += `<div id="cmtBody">`;
         str += `<input type="text" id="cmtText" value="${result[i].content}">`;
-        str += `<button type="button"> 수정 </button>`;
-        str += `<button type="button"> 삭제 </button>`;
+        str += `<button type="button" data-cno="${result[i].cno}" data-writer="${result[i].writer}" class="cmtModBtn"> 수정 </button>`;
+        str += `<button type="button" data-cno="${result[i].cno}" class="cmtDelBtn"> 삭제 </button>`;
         str += `</div> </div>`
         div.innerHTML += str;
     }
@@ -72,7 +72,87 @@ function spreadCommentList(result) {
 }
 
 
+//수정, 삭제 수행. 이벤트리스너를 통해 클릭으로 DOM 정보 가져오기
+document.addEventListener('click', (e) => {
+    console.log(e.target);
 
+    if (e.target.classList.contains('cmtModBtn')) {
+        let cno = e.target.dataset.cno;
+        let div = e.target.closest('div');  //가까운 div찾기, cmtText는 데이터가 크기때문에 div를 찾아서 열고, cmttext를 열어봐야한다.
+        let cmtText = div.querySelector('#cmtText').value;
+        let writer = e.target.dataset.writer;
+
+        console.log(cno);
+        console.log(div);
+        console.log(cmtText);
+        console.log(writer);
+        //수정 객체 서버로 보내자 
+        updateCommentFromServer(cno, writer, cmtText).then(result => {
+            if (result > 0) {
+                alert('수정 성공!');
+                printCommentList(bnoVal);
+            } else {
+                alert('수정 실패');
+            }
+        })
+
+    }
+
+    //삭제 객체 서버로 보내기
+
+    if (e.target.classList.contains('cmtDelBtn')) {
+        let cno = e.target.dataset.cno;
+        console.log(cno);
+
+        //삭제 함수로 보내기
+        removeCommentFromServer(cno).then(result => {
+            if (result > 0) {
+                alert('삭제 성공');
+                printCommentList(bnoVal);
+            } else {
+                alert('삭제 실패');
+            }
+        })
+
+    }
+
+
+
+})
+
+
+//수정 함수
+
+async function updateCommentFromServer(cnoVal, cmtWriter, cmtText) {
+    try {
+        const url = '/cmt/modify';
+        const config = {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            },
+            body: JSON.stringify({ cno: cnoVal, writer: cmtWriter, content: cmtText })
+        }
+
+        const resp = await fetch(url, config);
+        const result = await resp.text();
+        return result;
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function removeCommentFromServer(cno) {
+    try {
+
+        const resp = await fetch('/cmt/remove/' + cno); //remove는 comment 넘버만 있으면 삭제가능해서 객체를 보낼 필요가 없다.
+        const result = await resp.text();
+        return result;
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 
 

@@ -61,6 +61,20 @@ public class BoardController extends HttpServlet {
 		
 		switch(path) {
 		
+			case "home":
+				
+				try {
+					String writer = request.getParameter("writer");
+					List<BoardVO> myList = bsv.getMyList(writer);
+					request.setAttribute("mylist", myList);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				
+				destPage = "/index.jsp";
+				
+			break;
+		
 			case "register":
 				destPage = "/board/register.jsp";
 				break;
@@ -119,7 +133,7 @@ public class BoardController extends HttpServlet {
 					
 					isOk = bsv.register(bvo);
 					log.info("insert " + (isOk>0 ? "Ok" : "Fail"));
-					destPage = "list";
+					destPage = "pageList";
 					
 					
 					

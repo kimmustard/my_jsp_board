@@ -139,14 +139,34 @@ public class CommentController extends HttpServlet {
 
 			case "modify":
 				try {
+					log.info("Commnet modify check 1");
 					StringBuffer sb = new StringBuffer();
 					String line = "";
 					
 					BufferedReader br = request.getReader();
+					while((line = br.readLine()) != null) {
+						sb.append(line);
+					}
+					log.info("Modify sb = {}" , sb.toString());
 					
+					JSONParser parser = new JSONParser();
+					JSONObject jsonObj = (JSONObject) parser.parse(sb.toString());
 					
+					int cno = Integer.parseInt(jsonObj.get("cno").toString());
+					String content = jsonObj.get("content").toString();
+					
+					CommentVO cvo = new CommentVO(cno, content);
+					log.info("modify cvo = {}" , cvo);
+					
+					isOk = csv.modify(cvo);
+					log.info((isOk > 0)? "Ok" : "Fail");
+					
+					PrintWriter out = response.getWriter();
+					out.print(isOk);
+					
+	
 				} catch (Exception e) {
-					log.info("modify Error");
+					log.info("Comment modify Error");
 					e.printStackTrace();
 				}
 				
@@ -156,9 +176,17 @@ public class CommentController extends HttpServlet {
 				
 			case "remove":
 				try {
+					log.info("Comment remove check 1");
+					int cno = Integer.parseInt(pathVar);
+					isOk = csv.remove(cno);
+					log.info((isOk > 0)? "Ok" : "Fail");
+					
+					PrintWriter out = response.getWriter();
+					out.print(isOk);
+					
 					
 				} catch (Exception e) {
-					log.info("remove Error");
+					log.info("Comment remove Error");
 					e.printStackTrace();
 				}
 				

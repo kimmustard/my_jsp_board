@@ -41,6 +41,10 @@
   		order by bno desc limit #{pageStart}, #{qty}
   	</select>
 
+	<select id="mylist" parameterType="string" resultType="bvo">
+		select * from board where writer = #{writer}
+	</select>
+
 
 
 

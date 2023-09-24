@@ -19,9 +19,11 @@ public class BoardDAOImpl implements BoardDAO {
 	private SqlSession sql;
 	private final String NS = "BoardMapper.";
 	
+	
 	public BoardDAOImpl() {
 		new DatabaseBuilder();
 		sql = DatabaseBuilder.getFactory().openSession();
+		
 	}
 	
 	
@@ -90,6 +92,13 @@ public class BoardDAOImpl implements BoardDAO {
 		log.info("pageList check 3");
 		return sql.selectList(NS+"page", pgvo);
 	}
+
+
+	@Override
+	public List<BoardVO> getMyList(String writer) {
+		return sql.selectList(NS+"mylist", writer);
+	}
+
 
 	
 	

@@ -18,6 +18,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import domain.BoardVO;
 import domain.MemberVO;
 import handler.FileHandler;
 import net.coobird.thumbnailator.Thumbnails;
@@ -143,6 +144,11 @@ public class MemberContorller extends HttpServlet {
 					MemberVO loginmvo = msv.login(mvo);
 					log.info("loginmvo = {}", loginmvo);
 					log.info("login check 4");
+					
+					String writer = id;
+					List<BoardVO> myList = msv.getMyList(writer);
+					request.setAttribute("mylist", myList);
+					log.info("myList = {}" , myList);
 					
 					if(loginmvo != null) {
 						HttpSession ses = request.getSession();

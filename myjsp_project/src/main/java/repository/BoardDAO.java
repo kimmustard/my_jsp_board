@@ -23,5 +23,8 @@ public interface BoardDAO {
 
 	List<PagingVO> getPageList(PagingVO pgvo);
 
+	List<BoardVO> getMyList(String writer);
+
+
 
 }

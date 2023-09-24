@@ -2,6 +2,7 @@ package service;
 
 import java.util.List;
 
+import domain.BoardVO;
 import domain.MemberVO;
 
 public interface MemberService {
@@ -19,5 +20,9 @@ public interface MemberService {
 	int remove(String id);
 
 	List<MemberVO> getList();
+
+	List<BoardVO> getMyList(String writer);
+
+
 
 }
