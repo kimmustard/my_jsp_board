@@ -145,10 +145,6 @@ public class MemberContorller extends HttpServlet {
 					log.info("loginmvo = {}", loginmvo);
 					log.info("login check 4");
 					
-					String writer = id;
-					List<BoardVO> myList = msv.getMyList(writer);
-					request.setAttribute("mylist", myList);
-					log.info("myList = {}" , myList);
 					
 					if(loginmvo != null) {
 						HttpSession ses = request.getSession();
@@ -157,6 +153,10 @@ public class MemberContorller extends HttpServlet {
 					}else {
 						request.setAttribute("msg_login", 0);
 					}
+					String writer = id;
+					List<BoardVO> myList = msv.getMyList(writer);
+					request.setAttribute("mylist", myList);
+					log.info("myList = {}" , myList);
 					
 					destPage = "/index.jsp";
 					

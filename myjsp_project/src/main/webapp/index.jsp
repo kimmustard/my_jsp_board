@@ -37,11 +37,10 @@
 					width: 400px;
 					height: 350px;
 					position: absolute;
-					left: 50%;
-					top: 50%;
 					padding: 30px;
-					margin-left: -150px;
-					margin-top: -150px;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
 					background-color: #ffffff;
 					border-radius: 10px;
 					border: 1px solid rgb(80, 80, 80);
@@ -186,7 +185,7 @@
 
 			<nav class="navbar navbar-expand-lg bg-body-tertiary">
 				<div class="container-fluid">
-					<a class="navbar-brand" href="/index.jsp"> EZEN </a>
+					<a class="navbar-brand" href="/brd/home?writer=${ses.id}"> EZEN </a>
 					<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 						data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false"
 						aria-label="Toggle navigation">

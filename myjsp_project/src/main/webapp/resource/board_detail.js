@@ -50,21 +50,32 @@ async function postCommentToServer(cmtData) {
 function spreadCommentList(result) {
     console.log(result);
 
-
     let div = document.getElementById('cmtContainerExample');
     div.innerHTML = "";
     for (let i = 0; i < result.length; i++) {
         let str = `<div>`;
-        str += `<h4 id="cmtHeader${i}">`;
-        str += ` 글번호 : ${result[i].cno}`;
-        str += ` 작성자 : ${result[i].writer}`;
-        str += ` 작성날짜 : ${result[i].regdate}`;
-        str += ` 추천수 : ${result[i].cmt_recommend}`;
-        str += `</h4>`;
         str += `<div id="cmtBody">`;
+        str += `<table class="table table-hover">`;
+        str += `<tr class="table-dark">`;
+        str += `<th>댓글 번호</th>`;
+        str += `<td>${result[i].cno}</td>`;
+        str += `<th>작성일</th>`;
+        str += `<td>${result[i].regdate}</td>`;
+        str += `<th>추천수</th>`;
+        str += `<td>${result[i].cmt_recommend}</td>`;
+        str += `</tr>`;
+        str += `<tr>`;
+        str += `<th>작성자</th>`;
+        str += `<td>${result[i].writer}</td>`;
+        str += `<td>`;
         str += `<input type="text" id="cmtText" value="${result[i].content}">`;
+        str += `</td>`;
+        str += `</tr>`;
+        str += `</table>`;
+        str += `<div class="cmtBtnContainer">`;
         str += `<button type="button" data-cno="${result[i].cno}" data-writer="${result[i].writer}" class="cmtModBtn"> 수정 </button>`;
         str += `<button type="button" data-cno="${result[i].cno}" class="cmtDelBtn"> 삭제 </button>`;
+        str += `</div>`;
         str += `</div> </div>`
         div.innerHTML += str;
     }
