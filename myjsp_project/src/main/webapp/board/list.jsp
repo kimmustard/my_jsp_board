@@ -309,6 +309,8 @@
 			</div>
 
 
+			<script src="/resource/board_list.js"></script>
+
 
 		</body>
 
