@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import domain.BoardVO;
 import domain.PagingVO;
+import domain.RecommendVO;
 import repository.BoardDAO;
 import repository.BoardDAOImpl;
 import repository.CommentDAO;
@@ -76,6 +77,12 @@ public class BoardServiceImpl implements Service {
 	@Override
 	public List<BoardVO> getMyList(String writer) {
 		return bdao.getMyList(writer);
+	}
+
+	@Override
+	public RecommendVO rcmCheck(RecommendVO rvo) {
+		log.info("recommend Check 2");
+		return bdao.rcmCheck(rvo);
 	}
 
 	

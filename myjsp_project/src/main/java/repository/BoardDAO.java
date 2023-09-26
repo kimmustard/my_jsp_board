@@ -4,6 +4,7 @@ import java.util.List;
 
 import domain.BoardVO;
 import domain.PagingVO;
+import domain.RecommendVO;
 
 public interface BoardDAO {
 
@@ -24,6 +25,8 @@ public interface BoardDAO {
 	List<PagingVO> getPageList(PagingVO pgvo);
 
 	List<BoardVO> getMyList(String writer);
+
+	RecommendVO rcmCheck(RecommendVO rvo);
 
 
 

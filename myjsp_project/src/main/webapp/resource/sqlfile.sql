@@ -44,4 +44,16 @@ regdate datetime default now(),
 primary key(cno)
 );
 //댓글 추천수 추가
-alter table comment add cmt_recommend int default 0;
+alter table comment add recommend int default 0;
+
+
+//recommend DB
+create table recommend(
+rno int auto_increment,
+bno int,
+cno int,
+id varchar(100) not null,
+primary key(rno)
+);
+
+

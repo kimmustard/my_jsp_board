@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import domain.BoardVO;
 import domain.PagingVO;
+import domain.RecommendVO;
 import orm.DatabaseBuilder;
 import service.BoardServiceImpl;
 
@@ -73,6 +74,9 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public int delete(int bno) {
 		log.info("delete check 3");
+		sql.delete(NS+"delRmd", bno);
+		sql.commit();
+		
 		int isOk = sql.delete(NS+"del", bno);
 		if(isOk > 0) {
 			sql.commit();
@@ -100,6 +104,45 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 
+	@Override
+	public RecommendVO rcmCheck(RecommendVO rvo) {
+			log.info("recommend Check 3");
+			RecommendVO rvo1 = sql.selectOne(NS+"rcmCheck", rvo);
+			
+			if(rvo1 != null) {
+				log.info("이미 추천한 게시물입니다.");
+				return rvo1;
+			}
+		
+			
+			int isOk = sql.insert(NS+"rcmAdd", rvo);
+			if(isOk > 0) {
+				sql.commit();
+				
+			}
+			log.info("recommend Check 4");
+			
+			int bno = rvo.getBno();
+			log.info("recommen bno = {}" , bno);
+			int isOk1 = sql.update(NS+"rcmPlus", bno);
+			
+			if (isOk1> 0) {
+				
+				sql.commit();
+			}
+			
+			return rvo;
+			
+			
+		}
+	
+
+	
+		
+		
+	}
+
+
 	
 	
-}
+

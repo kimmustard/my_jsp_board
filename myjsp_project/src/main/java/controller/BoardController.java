@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 
 import domain.BoardVO;
 import domain.PagingVO;
+import domain.RecommendVO;
 import handler.FileHandler;
 import handler.PagingHandler;
 import net.coobird.thumbnailator.Thumbnails;
@@ -68,7 +69,8 @@ public class BoardController extends HttpServlet {
 					List<BoardVO> myList = bsv.getMyList(writer);
 					request.setAttribute("mylist", myList);
 				} catch (Exception e) {
-					// TODO: handle exception
+					log.info("home Error!");
+					e.printStackTrace();
 				}
 				
 				destPage = "/index.jsp";
@@ -219,7 +221,7 @@ public class BoardController extends HttpServlet {
 			case "ncdetail":
 				
 				try {
-					log.info("detail check 1");
+					log.info("NCdetail check 1");
 					int bno = Integer.parseInt(request.getParameter("bno"));
 					BoardVO bvo = bsv.ncdetail(bno);
 					request.setAttribute("bvo", bvo);
@@ -238,7 +240,19 @@ public class BoardController extends HttpServlet {
 			case "recommend":
 				try {
 					
-					destPage = "/board/detail.jsp";
+					int bno = Integer.parseInt(request.getParameter("bno"));
+					String id = request.getParameter("id");
+					RecommendVO rvo = new RecommendVO(bno, id);
+					log.info("rvo = {}" ,rvo);
+					RecommendVO rvo1 = bsv.rcmCheck(rvo);
+					
+					if(rvo1 != null ) {
+						request.setAttribute("rcmCheck", 1);
+					}
+					
+					log.info((rvo1 != null)? "Ok" : "Fail");
+					
+					destPage = "ncdetail?bno="+bno;
 				} catch (Exception e) {
 					log.info("recommend Error!");
 					e.printStackTrace();
@@ -352,7 +366,7 @@ public class BoardController extends HttpServlet {
 					
 					isOk = bsv.remove(bno);
 					log.info("remove DB :: " , (isOk > 0)? "Ok" : "Fail");
-					destPage = "list";
+					destPage = "pageList";
 					
 				} catch (Exception e) {
 					log.info("remove Error!");

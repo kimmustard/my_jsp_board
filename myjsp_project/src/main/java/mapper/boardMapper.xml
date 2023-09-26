@@ -47,6 +47,21 @@
 
 
 
+	<select id="rcmCheck" parameterType="rvo" resultType="rvo">
+		select * from recommend where bno = #{bno} and id = #{id}
+	</select>
+
+	<insert id="rcmAdd" parameterType="rvo">
+		insert into recommend(bno, id) values(#{bno}, #{id});
+	</insert>
+	
+	<update id="rcmPlus" parameterType="int">
+		update board set recommend = recommend + 1 where bno = #{bno}
+	</update>
+
+	<delete id="delRmd" parameterType="int">
+		delete from recommend where bno = #{bno}
+	</delete>
 
 
 	

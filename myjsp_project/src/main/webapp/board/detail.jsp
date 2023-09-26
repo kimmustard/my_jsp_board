@@ -39,19 +39,19 @@
 
 				.detailContainer {
 					font-family: 'Noto Sans KR', sans-serif;
-					display: block;
+					position: absolute;
 					text-align: center;
 					width: 1000px;
-					position: absolute;
-					top: 55%;
-					left: 50%;
-					transform: translate(-50%, -50%);
+					top: 150px;
+					left: 450px;
 					background-color: #ffffff;
 					border-radius: 10px;
 					border: 1px solid rgb(80, 80, 80);
+					margin-bottom: 100px;
 				}
 
 				.contents {
+					margin: 100px;
 					height: 300px;
 				}
 
@@ -89,7 +89,7 @@
 
 				th,
 				td {
-					font-size: 18px;
+					font-size: 15px;
 					font-family: 'Noto Sans KR', sans-serif;
 				}
 
@@ -104,6 +104,57 @@
 				.deBtnTest {
 					display: flex;
 					justify-content: space-between;
+				}
+
+				.cmtline {
+					margin-left: 50px;
+					margin-right: 50px;
+					margin-bottom: 100px;
+				}
+
+				.inputContent {
+					margin-left: 50px;
+					margin-right: 50px;
+					width: 500px;
+				}
+
+				.cmtBtnContainer {
+					display: flex;
+
+				}
+
+				.cmtModBtn,
+				.cmtDelBtn {
+					width: 70px;
+				}
+
+				.commentContainer {
+					display: flex;
+					justify-content: center;
+					margin-right: 50px;
+					margin-left: 50px;
+					margin-top: 100px;
+					margin-bottom: 100px;
+				}
+
+				.commentContainer>span {
+					font-family: 'Noto Sans KR', sans-serif;
+					font-weight: 700;
+					width: 100px;
+					margin-top: 8px;
+				}
+
+				.inputContent2 {
+					width: 400px;
+					justify-content: center;
+					width: 800px;
+				}
+
+				.inputWriter {
+					text-align: center;
+					border: none;
+					height: 40px;
+					width: 80px;
 				}
 			</style>
 
@@ -249,8 +300,11 @@
 				<div class="detailBtnContainer">
 					<c:if test="${ses.id ne null}">
 						<div class="detailBtnContainer1">
-							<a href="/brd/recommend?bno=${bvo.bno}"> <button class="btn btn-danger"> 추천
-								</button></a>
+							<form action="/brd/recommend" action="post">
+								<input type="hidden" name="bno" value="${bvo.bno}">
+								<input type="hidden" name="id" value="${ses.id}">
+								<button type="submit" id="rcmChecker" class="btn btn-danger"> 추천 </button>
+							</form>
 						</div>
 						<div class="deBtnTest">
 							<div class="detailBtnContainer2">
@@ -264,6 +318,35 @@
 					</c:if>
 
 				</div>
+
+				<hr>
+
+				<div>
+					<h4> 댓글 작성 </h4>
+
+					<div class="commentContainer">
+						<span> 작성자 : </span>
+						<input type="text" class="inputWriter" id="cmtWriter" value="${ses.id }" readonly="readonly">
+						<div class="input-group mb-3">
+							<c:if test="${ses.id ne null}">
+								<input type="text" class="form-control inputContent2" id="cmtText"
+									placeholder="댓글을 입력하세요">
+								<button class="btn btn-success" type="button" id="cmtAddBtn"> 댓글 등록 </button>
+							</c:if>
+							<c:if test="${ses.id eq null || ses.id eq ''}">
+								<input type="text" class="form-control inputContent2" id="cmtText"
+									placeholder="로그인 후 이용해주세요" readonly="readonly">
+								<button class="btn btn-success" type="button" id="cmtAddBtn" disabled> 댓글 등록 </button>
+							</c:if>
+						</div>
+
+					</div>
+				</div>
+
+				<hr>
+
+				<h3> 댓글 목록 </h3>
+
 				<!-- 댓글 표시 라인 -->
 				<div class="cmtline" id="cmtContainerExample">
 
@@ -271,12 +354,6 @@
 
 				</div>
 
-				<div>
-					댓글 목록 <br>
-					<input type="text" id="cmtWriter" value="${ses.id }" readonly="readonly"> <br>
-					<input type="text" id="cmtText" placeholder="댓글을 입력해주세요."> <br>
-					<button type="button" id="cmtAddBtn"> 등록 </button>
-				</div>
 
 
 
@@ -285,6 +362,8 @@
 
 			<script type="text/javascript">
 				const bnoVal = `<c:out value="${bvo.bno}"/>`;
+				const loginState = `<c:out value="${ses.id}"/>`
+
 			</script>
 
 			<script src="/resource/board_detail.js"></script>

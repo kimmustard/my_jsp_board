@@ -9,7 +9,7 @@ document.getElementById('cmtAddBtn').addEventListener('click', () => {
         //댓글 데이터 담을 객체
         let cmtData = {
             bno: bnoVal,
-            writer: document.getElementById('cmtWriter').value,
+            writer: document.getElementById("cmtWriter").value,
             content: cmtText
         };
 
@@ -46,41 +46,55 @@ async function postCommentToServer(cmtData) {
     }
 }
 
-//댓글 리스트 화면에 출력
+
+
+//(로그인전용)댓글 리스트 화면에 출력
 function spreadCommentList(result) {
     console.log(result);
+    console.log(loginState);
 
     let div = document.getElementById('cmtContainerExample');
     div.innerHTML = "";
     for (let i = 0; i < result.length; i++) {
+        let writer = result[i].writer;
+        console.log(writer);
         let str = `<div>`;
         str += `<div id="cmtBody">`;
         str += `<table class="table table-hover">`;
         str += `<tr class="table-dark">`;
-        str += `<th>댓글 번호</th>`;
-        str += `<td>${result[i].cno}</td>`;
-        str += `<th>작성일</th>`;
-        str += `<td>${result[i].regdate}</td>`;
-        str += `<th>추천수</th>`;
+        str += `<th>번호</th>`;
+        str += `<th>ID</th>`;
+        str += `<th>${result[i].regdate}</th>`;
+        str += `<th>추천</th>`;
         str += `<td>${result[i].cmt_recommend}</td>`;
         str += `</tr>`;
         str += `<tr>`;
-        str += `<th>작성자</th>`;
+        str += `<th>${result[i].cno}</th>`;
         str += `<td>${result[i].writer}</td>`;
-        str += `<td>`;
-        str += `<input type="text" id="cmtText" value="${result[i].content}">`;
+        str += `<td colspan="3">`;
+        str += `<div class="cmtBtnContainer">`;
+        str += `<input type="text" class="inputContent" id="cmtText" value="${result[i].content}">`;
+        str += `<button type="button" data-cno="${result[i].cno}" data-writer="${result[i].writer}" class="cmtModBtn btn btn-success" id="cmtModLock${i}"> 수정 </button>`;
+        str += `<button type="button" data-cno="${result[i].cno}" class="cmtDelBtn btn btn-success" id="cmtDelLock${i}"> 삭제 </button>`;
+        str += `</div>`;
         str += `</td>`;
         str += `</tr>`;
         str += `</table>`;
-        str += `<div class="cmtBtnContainer">`;
-        str += `<button type="button" data-cno="${result[i].cno}" data-writer="${result[i].writer}" class="cmtModBtn"> 수정 </button>`;
-        str += `<button type="button" data-cno="${result[i].cno}" class="cmtDelBtn"> 삭제 </button>`;
-        str += `</div>`;
         str += `</div> </div>`
         div.innerHTML += str;
+
+        // 댓글 아이디에 따라 버튼 잠금
+        if (loginState != writer) {
+            document.getElementById(`cmtModLock${i}`).disabled = true;
+            document.getElementById(`cmtDelLock${i}`).disabled = true;
+        }
     }
 
+
 }
+
+
+
 
 
 //수정, 삭제 수행. 이벤트리스너를 통해 클릭으로 DOM 정보 가져오기
@@ -190,3 +204,4 @@ function printCommentList(bno) {
         }
     })
 }
+
