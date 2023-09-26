@@ -88,6 +88,7 @@ function spreadCommentList(result) {
             document.getElementById(`cmtModLock${i}`).disabled = true;
             document.getElementById(`cmtDelLock${i}`).disabled = true;
         }
+
     }
 
 

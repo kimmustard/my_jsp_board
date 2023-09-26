@@ -342,10 +342,10 @@ public class BoardController extends HttpServlet {
 						}
 					}
 					log.info("bvo = {}" , bvo);
-					
+					int bno = bvo.getBno();
 					isOk = bsv.edit(bvo);
 					log.info((isOk > 0)? "Ok" : "Fail");
-					destPage = "list";
+					destPage = "ncdetail?bno="+bno;
 					
 		
 				} catch (Exception e) {

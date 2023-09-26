@@ -145,7 +145,7 @@
 
 		<nav class="navbar navbar-expand-lg bg-body-tertiary">
 			<div class="container-fluid">
-				<a class="navbar-brand" href="/index.jsp"> EZEN </a>
+				<a class="navbar-brand" href="/brd/home?writer=${ses.id}"> EZEN </a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
 					aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>

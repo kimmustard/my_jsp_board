@@ -52,7 +52,7 @@
 
 				.contents {
 					margin: 100px;
-					height: 300px;
+					height: 200px;
 				}
 
 
@@ -145,7 +145,6 @@
 				}
 
 				.inputContent2 {
-					width: 400px;
 					justify-content: center;
 					width: 800px;
 				}
@@ -211,7 +210,7 @@
 
 			<nav class="navbar navbar-expand-lg bg-body-tertiary">
 				<div class="container-fluid">
-					<a class="navbar-brand" href="/index.jsp"> EZEN </a>
+					<a class="navbar-brand" href="/brd/home?writer=${ses.id}"> EZEN </a>
 					<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 						data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false"
 						aria-label="Toggle navigation">
@@ -307,10 +306,14 @@
 							</form>
 						</div>
 						<div class="deBtnTest">
-							<div class="detailBtnContainer2">
-								<a href="/brd/modify?bno=${bvo.bno}"> <button class="btn btn-success"> 수정 </button></a>
-								<a href="/brd/remove?bno=${bvo.bno}"> <button class="btn btn-success"> 삭제 </button></a>
-							</div>
+							<c:if test="${ses.id eq bvo.writer}">
+								<div class="detailBtnContainer2">
+									<a href="/brd/modify?bno=${bvo.bno}"> <button class="btn btn-success"> 수정
+										</button></a>
+									<a href="/brd/remove?bno=${bvo.bno}"> <button class="btn btn-success"> 삭제
+										</button></a>
+								</div>
+							</c:if>
 							<div class="detailBtnContainer2">
 								<a href="/brd/pageList"> <button class="btn btn-dark"> 게시물 리스트 </button> </a>
 							</div>
