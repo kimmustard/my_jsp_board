@@ -156,7 +156,7 @@
 
 			<nav class="navbar navbar-expand-lg bg-body-tertiary">
 				<div class="container-fluid">
-					<a class="navbar-brand" href="/index.jsp"> EZEN </a>
+					<a class="navbar-brand" href="/brd/home?writer=${ses.id}"> EZEN </a>
 					<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 						data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false"
 						aria-label="Toggle navigation">
@@ -255,8 +255,9 @@
 					</div>
 					<div class="memberModBtnContainer">
 						<button type="submit" class="btn btn-success"> 작성완료 </button>
-						<a href="/index.jsp"> <button type="button" class="btn btn-success"> 메인으로 </button></a>
-						<a href="/mem/remove"> <button type="button" class="btn btn-danger"> 회원탈퇴 </button></a>
+						<a href="/brd/home?writer=${ses.id}"><button type="button" class="btn btn-success"> 메인으로
+							</button></a>
+						<a href="/mem/remove"><button type="button" class="btn btn-danger"> 회원탈퇴 </button></a>
 					</div>
 				</form>
 			</div>

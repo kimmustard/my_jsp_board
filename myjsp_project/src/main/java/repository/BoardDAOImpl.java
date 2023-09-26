@@ -135,9 +135,7 @@ public class BoardDAOImpl implements BoardDAO {
 			
 			
 		}
-	
 
-	
 		
 		
 	}

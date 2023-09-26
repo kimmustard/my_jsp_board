@@ -188,7 +188,13 @@
 			<div class="boardContainer">
 
 				<h1> 게시판 </h1>
-
+				<c:set value="${ph.pgvo.qty }" var="qtyTest"></c:set>
+				<select name="" id="boardQuantity">
+					<option value="10"> 10개씩 </option>
+					<option value="5"> 5개씩 </option>
+					<option value="7"> 7개씩 </option>
+					<option value="20"> 20개씩 </option>
+				</select>
 
 
 
@@ -292,6 +298,7 @@
 
 
 
+
 				<div class="boardBtnContainer">
 					<c:if test="${ses.id ne null}">
 						<a href="/brd/register"> <button type="button" class="btn btn-success">글쓰기</button></a>
@@ -300,6 +307,8 @@
 					</a>
 				</div>
 			</div>
+
+
 
 		</body>
 

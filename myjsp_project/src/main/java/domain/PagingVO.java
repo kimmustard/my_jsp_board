@@ -13,6 +13,10 @@ public class PagingVO {
 		this(1,10);
 	}
 	
+	public PagingVO(int qty) {
+		this.qty = qty;
+	}
+	
 	//페이지네이션 기본리스트값 출력 생성자
 	public PagingVO(int pageNo, int qty) {
 		this.pageNo = pageNo;
@@ -59,6 +63,11 @@ public class PagingVO {
 
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
+	}
+
+	@Override
+	public String toString() {
+		return "PagingVO [pageNo=" + pageNo + ", qty=" + qty + ", type=" + type + ", keyword=" + keyword + "]";
 	}
 	
 	

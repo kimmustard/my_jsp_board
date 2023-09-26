@@ -85,6 +85,7 @@ public class BoardServiceImpl implements Service {
 		return bdao.rcmCheck(rvo);
 	}
 
+
 	
 	
 	

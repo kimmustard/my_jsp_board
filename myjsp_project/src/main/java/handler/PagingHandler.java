@@ -8,16 +8,23 @@ public class PagingHandler {
 	private int endPage;
 	private int realEndPage;
 	private boolean prev, next;
+	private int dyStPage;	// 유연한 qty
+	private int dyEndPage;	// 유연한 qty
 	
 	private int totalCount;
 	private PagingVO pgvo;	//페이징 DB접속 객체
 	
+
+
 	public PagingHandler(PagingVO pgvo, int totalCount) {
 		this.pgvo = pgvo;
 		this.totalCount = totalCount;
 		
+	
 		this.endPage = 
-				(int)Math.ceil(pgvo.getPageNo() / (double) pgvo.getQty()) * pgvo.getQty();
+				(int)Math.ceil(pgvo.getPageNo() / (double) 10 ) * 10;
+		
+
 		
 		this.startPage = endPage - 9;
 		
@@ -29,7 +36,24 @@ public class PagingHandler {
 		this.prev = this.startPage > 1;
 		this.next = this.endPage < realEndPage;
 		
+		System.out.println();
+		System.out.println(pgvo.getQty());
+		
 	}
+	
+
+
+	
+	
+	public int getDyEndPage() {
+		return dyEndPage;
+	}
+
+
+	public void setDyEndPage(int dyEndPage) {
+		this.dyEndPage = dyEndPage;
+	}
+
 
 	public int getStartPage() {
 		return startPage;
@@ -85,6 +109,18 @@ public class PagingHandler {
 
 	public void setPgvo(PagingVO pgvo) {
 		this.pgvo = pgvo;
+	}
+
+
+
+	public int getDyStPage() {
+		return dyStPage;
+	}
+
+
+
+	public void setDyStPage(int dyStPage) {
+		this.dyStPage = dyStPage;
 	}
 	
 	

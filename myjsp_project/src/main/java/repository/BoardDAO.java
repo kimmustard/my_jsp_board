@@ -29,5 +29,4 @@ public interface BoardDAO {
 	RecommendVO rcmCheck(RecommendVO rvo);
 
 
-
 }

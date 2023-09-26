@@ -374,6 +374,15 @@ public class BoardController extends HttpServlet {
 				}
 				
 				break;
+				
+				
+				
+				
+				
+				
+				
+				
+			
 
 		}
 		
